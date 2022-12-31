@@ -21,6 +21,7 @@ const Login: React.FC = () => {
   return (
     <>
       <h1 style={{ textAlign: 'center' }}>Login to your account</h1>
+
       <Form
         form={form}
         layout='vertical'
@@ -31,8 +32,6 @@ const Login: React.FC = () => {
         autoComplete='off'>
         <Form.Item
           name='role'
-          label='Role'
-          required
           rules={[{ required: true, message: 'Please select your role!' }]}>
           <Radio.Group>
             <Radio.Button value='student'>Student</Radio.Button>
@@ -40,10 +39,9 @@ const Login: React.FC = () => {
             <Radio.Button value='manager'>Manager</Radio.Button>
           </Radio.Group>
         </Form.Item>
+
         <Form.Item
           name='email'
-          label='Email'
-          required
           hasFeedback
           tooltip='Email is a required field'
           rules={[
@@ -63,10 +61,9 @@ const Login: React.FC = () => {
             prefix={<UserOutlined />}
           />
         </Form.Item>
+
         <Form.Item
           name='password'
-          label='Password'
-          required
           hasFeedback
           tooltip={{
             title: 'Password is a required field',
@@ -92,8 +89,9 @@ const Login: React.FC = () => {
             block>
             Sign In
           </Button>
-          <br />
-          <br />
+        </Form.Item>
+
+        <Form.Item>
           No Account?
           <Link href='/signup'> Register now!</Link>
         </Form.Item>
