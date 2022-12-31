@@ -1,21 +1,61 @@
 import React from 'react';
 import Link from 'next/link';
-import { Col, Row, Button, Checkbox, Form, Input, Radio } from 'antd';
+import { useRouter } from 'next/router';
+import { Col, Row, Button, Checkbox, Form, Input, message, Radio } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 const Login: React.FC = () => {
-  const onFinish = (values: any) => {
+  const router = useRouter();
+  const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const success = (role: string) => {
+    messageApi.open({
+      type: 'success',
+      content: `User login as ${role} successfully`,
+    });
+  };
+
+  const error = () => {
+    messageApi.open({
+      type: 'error',
+      content: 'User login error',
+    });
+  };
+
+  const onFinish = async (values: any) => {
     console.log('Success:', values);
+
+    try {
+      const opts = {
+        method: 'post',
+        body: JSON.stringify(values),
+        headers: { 'Content-Type': 'application/json' },
+      };
+
+      const res = await fetch(`/api/login`, opts);
+      const data = await res.json();
+
+      console.log('user info', data);
+      const { role, token, userId } = data.data.data;
+
+      // store token to local storage
+      localStorage.setItem('AUTH_TOKEN', token);
+
+      router.push(`/dashboard`);
+    } catch (err) {
+      console.error(err);
+      error();
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
 
-  const [form] = Form.useForm();
-
   return (
     <>
+      {contextHolder}
       <Row>
         <Col
           xs={{ span: 22, offset: 1 }}
