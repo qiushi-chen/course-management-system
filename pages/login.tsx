@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Col, Row, Button, Checkbox, Form, Input, message, Radio } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LoginFormValue } from '@/lib/model/login';
+import apiService from '@/lib/service/api.service';
+import storage from '@/lib/service/storage';
 
 const Login: React.FC = () => {
   const router = useRouter();
@@ -23,30 +26,37 @@ const Login: React.FC = () => {
     });
   };
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: LoginFormValue) => {
     console.log('Success:', values);
 
-    try {
-      const opts = {
-        method: 'post',
-        body: JSON.stringify(values),
-        headers: { 'Content-Type': 'application/json' },
-      };
+    const { data } = await apiService.login(values);
 
-      const res = await fetch(`/api/login`, opts);
-      const data = await res.json();
-
-      console.log('user info', data);
-      const { role, token, userId } = data.data.data;
-
-      // store token to local storage
-      localStorage.setItem('AUTH_TOKEN', token);
-
-      router.push(`/dashboard`);
-    } catch (err) {
-      console.error(err);
-      error();
+    if (!!data) {
+      storage.setUser(data);
+      router.push(`/dashboard/${storage.role()}`);
     }
+
+    // try {
+    //   const opts = {
+    //     method: 'post',
+    //     body: JSON.stringify(values),
+    //     headers: { 'Content-Type': 'application/json' },
+    //   };
+
+    //   const res = await fetch(`/api/login`, opts);
+    //   const data = await res.json();
+
+    //   console.log('user info', data);
+    //   const { role, token, userId } = data.data.data;
+
+    //   // store token to local storage
+    //   localStorage.setItem('AUTH_TOKEN', token);
+
+    //   router.push(`/dashboard/${role}`);
+    // } catch (err) {
+    //   console.error(err);
+    //   error();
+    // }
   };
 
   const onFinishFailed = (errorInfo: any) => {
