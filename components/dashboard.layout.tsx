@@ -160,13 +160,12 @@ const DashboardLayout: React.FC = ({ children }: React.PropsWithChildren) => {
       </Sider>
 
       <Layout
+        id='content-layout'
         className='site-layout'
         style={{ height: '100vh', overflowY: 'scroll' }}>
-        {/* style={{ height: '100vh', overflowY: 'scroll', marginLeft: 200 }}> */}
         <Header
           style={{
             top: 0,
-            // position: '-webkit-sticky',
             position: 'sticky',
             zIndex: 1,
             paddingLeft: '3rem',

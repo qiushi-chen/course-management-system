@@ -3,8 +3,13 @@ import { message } from 'antd';
 import axios, { AxiosError } from 'axios';
 import { AES } from 'crypto-js';
 import * as model from '../model';
-import { BaseType, DeleteResponse, IResponse, QueryParams } from '../model/api';
-import { Country, Degree } from '../model/common';
+import {
+  BaseType,
+  DeleteResponse,
+  IResponse,
+  QueryParams,
+} from '@/lib/model/api';
+import { Country, Degree } from '@/lib/model/common';
 import {
   AddCourseRequest,
   AddCourseResponse,
@@ -17,16 +22,16 @@ import {
   ScheduleRequest,
   UpdateCourseRequest,
   UpdateCourseResponse,
-} from '../model/course';
-import { LoginRequest, LoginResponse, SignUpRequest } from '../model/login';
+} from '@/lib/model/course';
+import { LoginRequest, LoginResponse, SignUpRequest } from '@/lib/model/login';
 import {
   MessagesRequest,
   MessagesResponse,
   MessageStatisticResponse,
-} from '../model/message';
-import * as statistics from '../model/statistics';
-import { fieldMap } from '../util/api.field.remap';
-import { RootPath, SubPath } from './api.path';
+} from '@/lib/model/message';
+import * as statistics from '@/lib/model/statistics';
+import { fieldMap } from '@/lib/util/api.field.remap';
+import { RootPath, SubPath } from '@/lib/service/api.path';
 import storage from './storage';
 
 const getBaseUrl = () => {
@@ -50,7 +55,7 @@ axiosInstance.interceptors.request.use((config) => {
       ...config,
       headers: {
         ...config.headers,
-        Authorization: 'Bearer ' + storage?.token,
+        Authorization: 'Bearer ' + storage?.token(),
       },
     };
   }
