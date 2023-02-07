@@ -1,6 +1,4 @@
 import { Avatar, Card, Col, Row, Table, Tabs, Tag } from 'antd';
-import type { TabsProps } from 'antd';
-
 import DashboardLayout from '@/components/dashboard.layout';
 import { Course } from '@/domain/user.d';
 import { StudentResponse } from '@/lib/model/student';
@@ -13,18 +11,11 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { programLanguageColors } from '@/lib/constant';
 
-// const style: React.CSSProperties = { background: '#0092ff', padding: '8px 0' };
 const H3: React.CSSProperties = {
   color: '#7356f1',
   margin: '20px 0px',
   fontSize: '24px',
 };
-
-// export const H3 = styled.h3`
-//   color: #7356f1;
-//   margin: 20px 0px;
-//   font-size: 24px;
-// `;
 
 export async function getServerSideProps(context: any) {
   // todo get student profile here;
@@ -34,19 +25,6 @@ export async function getServerSideProps(context: any) {
     props: { id },
   };
 }
-
-const items: TabsProps['items'] = [
-  {
-    key: '1',
-    label: `Tab 1`,
-    children: `Content of Tab Pane 1`,
-  },
-  {
-    key: '2',
-    label: `Tab 2`,
-    children: `Content of Tab Pane 2`,
-  },
-];
 
 const StudentDetail = (props: { id: number }) => {
   const router = useRouter();
@@ -90,15 +68,11 @@ const StudentDetail = (props: { id: number }) => {
       // const url = `/api/students`;
       const url = `/api/students?id=${id}`;
 
-      // let response = await fetch(url, { method: 'GET' });
       let response = await fetch(url);
       const data = (await response.json()).data;
-      console.log('get = 1', data);
 
       // const { data } = await apiService.getStudentById(id);
-      // console.log(data);
 
-      // debugger;
       const info = [
         { label: 'Name', value: data.name },
         { label: 'Age', value: data.age },
@@ -119,16 +93,11 @@ const StudentDetail = (props: { id: number }) => {
       ];
 
       setInfo(info);
-      console.log('data.courses : ', data.courses, typeof data.courses);
       setCourses(data.courses);
       setAbout(about);
       setData(data);
     })();
   }, []);
-
-  const onChange = (key: string) => {
-    console.log(key);
-  };
 
   return (
     <DashboardLayout>
@@ -165,7 +134,6 @@ const StudentDetail = (props: { id: number }) => {
 
         <Col offset={1} span={15}>
           <Card>
-            {/* <Tabs defaultActiveKey='1' items={items} onChange={onChange} /> */}
             <Tabs defaultActiveKey='1' animated={true}>
               <Tabs.TabPane tab='About' key='1'>
                 <h3 style={H3}>Information</h3>
