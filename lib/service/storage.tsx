@@ -2,18 +2,25 @@ import { AUTH_TOKEN } from '@/constants';
 import { LoginResponse as UserInfo } from '../model/login';
 
 const setUser = (user: UserInfo) => {
-  localStorage.setItem(AUTH_TOKEN, JSON.stringify(user));
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(AUTH_TOKEN, JSON.stringify(user));
+  }
 };
 
 const deleteUser = () => {
-  localStorage.removeItem(AUTH_TOKEN);
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(AUTH_TOKEN);
+  }
 };
 
 const getUser = (): UserInfo | null => {
-  const item = localStorage.getItem(AUTH_TOKEN);
-  if (item) {
-    const user = JSON.parse(item) as UserInfo;
-    return user;
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    const item = localStorage.getItem(AUTH_TOKEN);
+    if (item) {
+      const user = JSON.parse(item) as UserInfo;
+      return user;
+    }
   }
   return null;
 };

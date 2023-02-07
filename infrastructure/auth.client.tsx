@@ -2,6 +2,7 @@ import { AES } from 'crypto-js';
 
 import settings from '@/settings';
 import { User, LoginResponse } from '../domain/user.d';
+import storage from '@/lib/service/storage';
 
 const login = async (user: User) => {
   const { password } = user;
@@ -33,9 +34,40 @@ const login = async (user: User) => {
 
 const signup = (user: User) => {};
 
+const getStuById = async (id: string) => {
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmFnZXJAYWRtaW4uY29tIiwicm9sZSI6Im1hbmFnZXIiLCJpZCI6MywiaWF0IjoxNjczMDY0NzcyLCJleHAiOjE2ODA4NDA3NzJ9.fDiY8bGUUOoJ5wE1bg-AMMNOEGG6kBF_ZujXimcmFlk';
+  console.log('server token', token);
+  const url = `${settings.base_url}/students/${id}`;
+  const opts = {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const res = await fetch(url, opts);
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text);
+    }
+    const data = await res.json();
+    console.log(data);
+    return data;
+    // debugger;
+  } catch (err) {
+    console.error(err);
+    return Promise.reject('get student by id error');
+  }
+};
+
 const auth_client = {
   login,
   signup,
+  getStuById,
 };
 
 export default auth_client;

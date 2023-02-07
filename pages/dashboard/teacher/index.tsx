@@ -53,12 +53,12 @@ const items: MenuItem[] = [
   getItem('Message', '9', <FileOutlined />),
 ];
 
-const Manager: React.FC = () => {
+const Teacher: React.FC = () => {
   return (
     <DashboardLayout>
-      <h1>Manager Dashboard</h1>
+      <h1>Teacher Dashboard</h1>
     </DashboardLayout>
   );
 };
 
-export default Manager;
+export default Teacher;

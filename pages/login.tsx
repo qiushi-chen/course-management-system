@@ -6,6 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { LoginFormValue } from '@/lib/model/login';
 import apiService from '@/lib/service/api.service';
 import storage from '@/lib/service/storage';
+import { COURSE_MANAGEMENT_ASSISTANT } from '@/constants';
 
 const Login: React.FC = () => {
   const router = useRouter();
@@ -72,7 +73,14 @@ const Login: React.FC = () => {
           sm={{ span: 18, offset: 3 }}
           md={{ span: 14, offset: 5 }}
           lg={{ span: 8, offset: 8 }}>
-          <h1 style={{ textAlign: 'center' }}>Login to your account</h1>
+          <h1
+            style={{
+              textAlign: 'center',
+              marginTop: '2rem',
+              marginBottom: '2.5rem',
+            }}>
+            {COURSE_MANAGEMENT_ASSISTANT}
+          </h1>
 
           <Form
             form={form}

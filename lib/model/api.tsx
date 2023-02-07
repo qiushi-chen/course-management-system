@@ -14,6 +14,10 @@ export interface Paginator {
   total: number;
 }
 
+export type RequestOmitPaginator<T> = Omit<T, 'page' | 'limit'>;
+
+export type DeleteResponse = boolean;
+
 export interface ListResponse {
   total: number;
   paginator?: Paginator;
