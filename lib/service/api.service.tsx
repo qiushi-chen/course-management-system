@@ -24,6 +24,7 @@ import {
   UpdateCourseResponse,
 } from '@/lib/model/course';
 import { LoginRequest, LoginResponse, SignUpRequest } from '@/lib/model/login';
+
 import {
   MessagesRequest,
   MessagesResponse,
@@ -32,6 +33,7 @@ import {
 import * as statistics from '@/lib/model/statistics';
 import { fieldMap } from '@/lib/util/api.field.remap';
 import { RootPath, SubPath } from '@/lib/service/api.path';
+
 import storage from './storage';
 
 const getBaseUrl = () => {

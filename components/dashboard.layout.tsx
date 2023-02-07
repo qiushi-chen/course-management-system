@@ -160,6 +160,7 @@ const DashboardLayout: React.FC = ({ children }: React.PropsWithChildren) => {
       </Sider>
 
       <Layout
+
         id='content-layout'
         className='site-layout'
         style={{ height: '100vh', overflowY: 'scroll' }}>
