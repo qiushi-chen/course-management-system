@@ -20,7 +20,6 @@ export function ScrollMode() {
   >(apiService.getCourses.bind(apiService), 'courses', false);
 
   const loadMoreData = () => {
-    // console.log('paginator ====', paginator);
     setPaginator({ ...paginator, page: paginator.page + 1 });
   };
 
