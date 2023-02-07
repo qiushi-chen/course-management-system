@@ -35,8 +35,7 @@ const login = async (user: User) => {
 const signup = (user: User) => {};
 
 const getStuById = async (id: string) => {
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmFnZXJAYWRtaW4uY29tIiwicm9sZSI6Im1hbmFnZXIiLCJpZCI6MywiaWF0IjoxNjczMDY0NzcyLCJleHAiOjE2ODA4NDA3NzJ9.fDiY8bGUUOoJ5wE1bg-AMMNOEGG6kBF_ZujXimcmFlk';
+  const token = '';
   console.log('server token', token);
   const url = `${settings.base_url}/students/${id}`;
   const opts = {

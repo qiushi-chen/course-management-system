@@ -66,12 +66,11 @@ const StudentDetail = (props: { id: number }) => {
     (async () => {
       const id = +router.query.id || props.id;
       // const url = `/api/students`;
-      const url = `/api/students?id=${id}`;
+      // const url = `/api/students?id=${id}`;
+      // let response = await fetch(url);
+      // const data = (await response.json()).data;
 
-      let response = await fetch(url);
-      const data = (await response.json()).data;
-
-      // const { data } = await apiService.getStudentById(id);
+      const { data } = await apiService.getStudentById(id);
 
       const info = [
         { label: 'Name', value: data.name },
