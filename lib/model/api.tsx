@@ -11,7 +11,7 @@ export interface QueryParams {
 export interface Paginator {
   page: number;
   limit: number;
-  total: number;
+  total?: number;
 }
 
 export type RequestOmitPaginator<T> = Omit<T, 'page' | 'limit'>;
